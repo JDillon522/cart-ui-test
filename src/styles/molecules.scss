@@ -1,0 +1,9 @@
+@use './variables.scss' as var;
+
+.error {
+  color: var.$red;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 300;
+  font-style: normal;
+}

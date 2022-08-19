@@ -1,0 +1,6 @@
+@use '../../../styles/variables.scss' as var;
+
+section {
+  background-color: var.$semi-dark-blue;
+  padding: var.$base-margin;
+}

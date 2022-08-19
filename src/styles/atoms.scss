@@ -1,0 +1,72 @@
+@use './variables.scss' as var;
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  font-family: var.$font-family;
+  background-color: var.$dark-blue;
+  box-sizing: border-box;
+  font-size: var.$base-font-size;
+}
+
+app-root {
+  width: 90vw;
+  margin: 5vh auto;
+}
+
+h1 {
+  @include var.heading-large;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  @include var.heading-medium;
+}
+
+h3 {
+  @include var.heading-small;
+}
+
+h4 {
+  @include var.heading-x-small;
+}
+
+label {
+  @include var.body-small;
+}
+
+p {
+  @include var.body-medium;
+  max-width: 60ch;
+  margin: .5rem 0;
+
+  &.small {
+    @include var.body-small;
+  }
+}
+
+button {
+  font-size: 15px;
+  line-height: 19px;
+  font-weight: 300;
+  text-align: center;
+  font-style: normal;
+  padding: 1em;
+  width: fit-content;
+  color: var.$pure-white;
+  background-color: var.$red;
+  border: none;
+  border-radius: 6px;
+  transition: all .15s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    color: var.$semi-dark-blue;
+    background-color: var.$pure-white;
+  }
+}

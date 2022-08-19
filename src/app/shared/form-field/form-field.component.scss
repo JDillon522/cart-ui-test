@@ -1,0 +1,56 @@
+@use '../../../styles/variables.scss' as var;
+@use '../../../styles/molecules.scss';
+
+.form-field {
+  border: 1px solid transparent;
+  border-bottom: 1px solid var.$greyish-blue;
+  transition: border .15s ease-in;
+  display: block;
+  align-items: center;
+  position: relative;
+  padding: .5rem .5rem 0;
+
+  &:focus-within {
+    border: 1px solid var.$pure-white;
+  }
+
+  .error {
+    position: absolute;
+    top: 12px;
+    width: 100%;
+    text-align: end;
+    z-index: 0;
+  }
+
+  &.has-error {
+    border: 1px solid var.$red;
+  }
+
+  input {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 37px;
+    width: calc(100% - 16px);
+    background-color: transparent;
+    border: none;
+    color: var.$pure-white;
+    padding-bottom: 4px;
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 300;
+    font-style: normal;
+    caret-color: var.$red;
+
+    &:focus-visible,
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var.$greyish-blue;
+    }
+  }
+}

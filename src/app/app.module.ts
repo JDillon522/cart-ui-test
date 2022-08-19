@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Route, RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PaymentModule } from './payment/payment.module';
+
+const routes: Route[] = [
+  {
+    path: '',
+    loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule)
+  }
+]
 
 @NgModule({
   declarations: [
@@ -10,7 +18,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    PaymentModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
