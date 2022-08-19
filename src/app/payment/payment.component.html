@@ -5,9 +5,24 @@
   <div body>
 
     <app-form-field>
-    <label for="Test" app-label>Test</label>
-    <input type="text" id="Test" app-input placeholder="Enter some text">
-  </app-form-field>
+      <label for="name" app-label>Name</label>
+      <input type="text" id="Name" app-input placeholder="John Snow">
+    </app-form-field>
+
+    <app-form-field>
+      <label for="email" app-label>Email</label>
+      <input type="email" id="Email" app-input placeholder="kingInTheNorth@nightswatch.com">
+    </app-form-field>
+
+    <app-form-field>
+      <label for="accountNumber" app-label>Account Number</label>
+      <input type="number" id="accountNumber" app-input placeholder="8675309">
+    </app-form-field>
+
+    <app-form-field>
+      <label for="payment" app-label>Payment Amount</label>
+      <input type="text" id="payment" app-input placeholder="$19.99">
+    </app-form-field>
 
   </div>
 </app-card>

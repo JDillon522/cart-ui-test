@@ -4,6 +4,7 @@ import { PaymentComponent } from './payment.component';
 import { Route, RouterModule } from '@angular/router';
 import { FormFieldModule } from '../shared/form-field/form-field.module';
 import { CardModule } from '../shared/card/card.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Route[] = [
   {
@@ -18,6 +19,8 @@ const routes: Route[] = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     FormFieldModule,
     CardModule

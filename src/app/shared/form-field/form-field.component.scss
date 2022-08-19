@@ -9,6 +9,7 @@
   align-items: center;
   position: relative;
   padding: .5rem .5rem 0;
+  margin-bottom: var.$base-margin;
 
   &:focus-within {
     border: 1px solid var.$pure-white;

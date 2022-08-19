@@ -1,0 +1,5 @@
+@use '../../styles/variables.scss' as var;
+
+app-form-field {
+  margin-bottom: var.$base-margin;
+}
