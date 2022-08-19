@@ -13,8 +13,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
         <ng-content select="[body]"></ng-content>
       </div>
 
-      <div class="footer-content">
-        <ng-content select="[footer]"></ng-content>
+      <div class="actions-content">
+        <ng-content select="[actions]"></ng-content>
       </div>
     </section>
   `,

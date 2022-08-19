@@ -1,5 +1,30 @@
 @use '../../styles/variables.scss' as var;
 
-app-form-field {
-  margin-bottom: var.$base-margin;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  h1 {
+    margin: 0;
+  }
+
+  .available {
+    h3 {
+      text-align: end;
+    }
+  }
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
 }

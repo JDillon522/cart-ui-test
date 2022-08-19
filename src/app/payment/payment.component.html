@@ -1,28 +1,40 @@
-<h1>Payment</h1>
+<header>
+  <h1>Payment</h1>
+
+  <div class="available">
+    <label>Available Balance</label>
+    <h3>{{ '500' | currency }}</h3>
+  </div>
+</header>
 
 <app-card>
 
-  <div body>
+  <form [formGroup]="paymentForm" body>
 
-    <app-form-field>
+    <app-form-field [control]="paymentForm.get('name')">
       <label for="name" app-label>Name</label>
-      <input type="text" id="Name" app-input placeholder="John Snow">
+      <input type="text" id="Name" app-input placeholder="John Snow" formControlName="name">
     </app-form-field>
 
-    <app-form-field>
+    <app-form-field [control]="paymentForm.get('email')">
       <label for="email" app-label>Email</label>
-      <input type="email" id="Email" app-input placeholder="kingInTheNorth@nightswatch.com">
+      <input type="email" id="Email" app-input placeholder="kingInTheNorth@nightswatch.com" formControlName="email">
     </app-form-field>
 
-    <app-form-field>
+    <app-form-field [control]="paymentForm.get('accountNumber')">
       <label for="accountNumber" app-label>Account Number</label>
-      <input type="number" id="accountNumber" app-input placeholder="8675309">
+      <input type="number" id="accountNumber" app-input placeholder="8675309" formControlName="accountNumber">
     </app-form-field>
 
-    <app-form-field>
+    <app-form-field [control]="paymentForm.get('total')">
       <label for="payment" app-label>Payment Amount</label>
-      <input type="text" id="payment" app-input placeholder="$19.99">
+      <input type="text" id="payment" app-input placeholder="$19.99" formControlName="total">
     </app-form-field>
 
+  </form>
+
+  <div actions class="actions">
+    <button class="cancel">Cancel</button>
+    <button>Submit</button>
   </div>
 </app-card>

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
 
-// interface IPaymentForm {
-//   name: FormControl<string>;
-//   email: string;
-//   accountNumber: number;
-//   total: number;
-// };
+interface IPaymentForm {
+  name: FormControl<string | null>;
+  email: FormControl<string | null>;
+  accountNumber: FormControl<number | null>;
+  total: FormControl<number | null>;
+};
 
 @Component({
   selector: 'app-payment',
@@ -15,9 +15,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PaymentComponent implements OnInit {
 
-  public paymentForm: FormGroup = new FormGroup({
+  public paymentForm: UntypedFormGroup = new FormGroup<IPaymentForm>({
     name: new FormControl(null, Validators.required),
-
+    email: new FormControl(null, Validators.email),
+    accountNumber: new FormControl(null, Validators.required),
+    total: new FormControl(null, Validators.required)
   })
 
   constructor() { }

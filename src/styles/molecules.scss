@@ -2,8 +2,16 @@
 
 .error {
   color: var.$red;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: var.$base-font-size;
+  line-height: calc(var.$base-font-size * 1.2);
   font-weight: 300;
   font-style: normal;
+}
+
+button.cancel {
+  background-color: transparent;
+
+  &:hover {
+    background-color: var.$red;
+  }
 }

@@ -106,6 +106,5 @@
         }
       }
     }
-  },
-  "defaultProject": "cart-ui-test"
+  }
 }

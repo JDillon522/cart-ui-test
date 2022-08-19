@@ -1,26 +1,16 @@
 @use '../../../styles/variables.scss' as var;
-@use '../../../styles/molecules.scss';
 
 .form-field {
   border: 1px solid transparent;
   border-bottom: 1px solid var.$greyish-blue;
   transition: border .15s ease-in;
+  border-radius: var.$border-radius;
   display: block;
   align-items: center;
-  position: relative;
   padding: .5rem .5rem 0;
-  margin-bottom: var.$base-margin;
 
   &:focus-within {
     border: 1px solid var.$pure-white;
-  }
-
-  .error {
-    position: absolute;
-    top: 12px;
-    width: 100%;
-    text-align: end;
-    z-index: 0;
   }
 
   &.has-error {
@@ -54,4 +44,10 @@
       color: var.$greyish-blue;
     }
   }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  height: 2rem;
 }

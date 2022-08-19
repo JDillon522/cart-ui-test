@@ -51,17 +51,17 @@ p {
 }
 
 button {
-  font-size: 15px;
-  line-height: 19px;
+  font-size: calc(var.$base-font-size * 1.25);
+  line-height: calc(var.$base-font-size * 1.5);
   font-weight: 300;
   text-align: center;
   font-style: normal;
   padding: 1em;
   width: fit-content;
   color: var.$pure-white;
-  background-color: var.$red;
+  background-color: var.$greyish-blue;
   border: none;
-  border-radius: 6px;
+  border-radius: var.$border-radius;
   transition: all .15s ease-in;
   cursor: pointer;
 
