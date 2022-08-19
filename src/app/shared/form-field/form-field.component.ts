@@ -1,5 +1,5 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, UntypedFormControl, ValidationErrors } from '@angular/forms';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export enum ErrorsMessageEnum {
   'required' = 'Cant\'t be empty',
@@ -22,7 +22,7 @@ export enum ErrorsMessageEnum {
 })
 export class FormFieldComponent {
   @Input()
-  public control!: AbstractControl | UntypedFormControl | null;
+  public control!: AbstractControl | null;
 
   get error(): any {
     if (!this.control?.errors || !this.control?.touched) {

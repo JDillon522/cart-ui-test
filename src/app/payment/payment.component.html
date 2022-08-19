@@ -3,7 +3,7 @@
 
   <div class="available">
     <label>Available Balance</label>
-    <h3>{{ '500' | currency }}</h3>
+    <h3>{{ availableBalance$ | async | currency }}</h3>
   </div>
 </header>
 
@@ -34,7 +34,7 @@
   </form>
 
   <div actions class="actions">
-    <button class="cancel">Cancel</button>
-    <button>Submit</button>
+    <button class="cancel" (click)="reset()">Cancel</button>
+    <button [disabled]="paymentForm.invalid">Submit</button>
   </div>
 </app-card>
