@@ -18,23 +18,24 @@
 
     <app-form-field [control]="paymentForm.get('email')">
       <label for="email" app-label>Email</label>
-      <input type="email" id="Email" app-input placeholder="kingInTheNorth@nightswatch.com" formControlName="email">
+      <input type="email" id="Email" app-input placeholder="know.nothing@nightswatch.com" formControlName="email">
     </app-form-field>
 
     <app-form-field [control]="paymentForm.get('accountNumber')">
       <label for="accountNumber" app-label>Account Number</label>
-      <input type="number" id="accountNumber" app-input placeholder="8675309" formControlName="accountNumber">
+      <input type="number" id="accountNumber" app-input placeholder="eg: 8675309" formControlName="accountNumber">
     </app-form-field>
 
-    <app-form-field [control]="paymentForm.get('total')">
+    <app-form-field [control]="paymentForm.get('paymentAmount')">
       <label for="payment" app-label>Payment Amount</label>
-      <input type="text" currencyMask [options]="{align: 'left'}" id="payment" app-input placeholder="$19.99" formControlName="total">
+      <input type="text" currencyMask [options]="{align: 'left'}" id="payment" app-input placeholder="$19.99" formControlName="paymentAmount">
     </app-form-field>
 
   </form>
 
   <div actions class="actions">
-    <button class="cancel" (click)="reset()">Cancel</button>
-    <button [disabled]="paymentForm.invalid" (click)="submit()">Submit</button>
+    <h3 *ngIf="transacting$ | async">Submitting...</h3>
+    <button class="cancel" [disabled]="(transacting$ | async)" (click)="reset()">Cancel</button>
+    <button [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
   </div>
 </app-card>

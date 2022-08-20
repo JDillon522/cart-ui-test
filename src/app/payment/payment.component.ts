@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FundsAvailableValidator } from '../shared/validators/fundsAvailable.validator';
 import { PaymentService } from './payment.service';
-
-interface IPaymentForm {
-  name: FormControl<string | null>;
-  email: FormControl<string | null>;
-  accountNumber: FormControl<number | null>;
-  total: FormControl<number | null>;
-};
+import { tap } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
+import { IPaymentForm, IPaymentFormValue } from '../shared/interfaces/payment';
 
 @Component({
   selector: 'app-payment',
@@ -18,12 +14,15 @@ interface IPaymentForm {
 })
 export class PaymentComponent implements OnInit {
   public availableBalance$ = this.paymentService.availableBalance$;
+  public transacting$ = this.paymentService.transacting$.pipe(
+    tap((transacting: boolean) => transacting ? this.paymentForm.disable() : this.paymentForm.enable())
+  );
 
   public paymentForm: FormGroup<IPaymentForm> = new FormGroup<IPaymentForm>({
     name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.email),
     accountNumber: new FormControl(null, Validators.required),
-    total: new FormControl(null, {
+    paymentAmount: new FormControl(null, {
       validators: [Validators.required],
       asyncValidators: this.fundsAvailable.validate.bind(this.fundsAvailable),
       updateOn: 'change'
@@ -38,11 +37,15 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public submit(): void {
-    const total = this.paymentForm.get('total')?.value;
+  public async submit(): Promise<void> {
+    const form = this.paymentForm.getRawValue() as IPaymentFormValue;
 
-    this.paymentService.processTransaction(total as number)
+    await firstValueFrom(this.paymentService.processTransaction(form));
+
+    this.paymentForm.reset();
   }
+
+
 
   public reset(): void {
     this.paymentForm.reset();
