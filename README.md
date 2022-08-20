@@ -1,5 +1,7 @@
 # CartUiTest
 
+Deployed on [GitHub Pages](https://jdillon522.github.io/cart-ui-test/)
+
 ### Project Goals:
 - [ ] Create payment form component with the following features:
   - [x] Sass
