@@ -3,7 +3,8 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export enum ErrorsMessageEnum {
   'required' = 'Cant\'t be empty',
-  'email' = 'Must be a valid email'
+  'email' = 'Must be a valid email',
+  'noFundsAvailable' = 'You cannot exceed your available balance'
 }
 
 @Component({

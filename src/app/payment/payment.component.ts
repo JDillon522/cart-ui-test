@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
+import { FundsAvailableValidator } from '../shared/validators/fundsAvailable.validator';
 import { PaymentService } from './payment.service';
 
 interface IPaymentForm {
@@ -12,7 +13,8 @@ interface IPaymentForm {
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
+  providers: [FundsAvailableValidator]
 })
 export class PaymentComponent implements OnInit {
   public availableBalance$ = this.paymentService.availableBalance$;
@@ -21,11 +23,16 @@ export class PaymentComponent implements OnInit {
     name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.email),
     accountNumber: new FormControl(null, Validators.required),
-    total: new FormControl(null, Validators.required)
+    total: new FormControl(null, {
+      validators: [Validators.required],
+      asyncValidators: this.fundsAvailable.validate.bind(this.fundsAvailable),
+      updateOn: 'change'
+    })
   });
 
   constructor(
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private fundsAvailable: FundsAvailableValidator
   ) { }
 
   ngOnInit(): void {
