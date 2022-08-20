@@ -7,43 +7,45 @@
   </div>
 </header>
 
-<app-card>
+<main>
+  <app-card>
 
-  <form [formGroup]="paymentForm" body (keydown.enter)="submit()">
+    <form [formGroup]="paymentForm" body (keydown.enter)="submit()">
 
-    <app-form-field [control]="paymentForm.get('name')">
-      <label for="name" app-label>Name</label>
-      <input type="text" id="Name" app-input placeholder="John Snow" formControlName="name">
-    </app-form-field>
+      <app-form-field [control]="paymentForm.get('name')">
+        <label for="name" app-label>Name</label>
+        <input type="text" id="Name" app-input placeholder="John Snow" formControlName="name">
+      </app-form-field>
 
-    <app-form-field [control]="paymentForm.get('email')">
-      <label for="email" app-label>Email</label>
-      <input type="email" id="Email" app-input placeholder="know.nothing@nightswatch.com" formControlName="email">
-    </app-form-field>
+      <app-form-field [control]="paymentForm.get('email')">
+        <label for="email" app-label>Email</label>
+        <input type="email" id="Email" app-input placeholder="know.nothing@nightswatch.com" formControlName="email">
+      </app-form-field>
 
-    <app-form-field [control]="paymentForm.get('accountNumber')">
-      <label for="accountNumber" app-label>Account Number</label>
-      <input type="number" id="accountNumber" app-input placeholder="eg: 8675309" formControlName="accountNumber">
-    </app-form-field>
+      <app-form-field [control]="paymentForm.get('accountNumber')">
+        <label for="accountNumber" app-label>Account Number</label>
+        <input type="number" id="accountNumber" app-input placeholder="eg: 8675309" formControlName="accountNumber">
+      </app-form-field>
 
-    <app-form-field [control]="paymentForm.get('paymentAmount')">
-      <label for="payment" app-label>Payment Amount</label>
-      <input type="text" currencyMask [options]="{align: 'left'}" id="payment" app-input placeholder="$19.99" formControlName="paymentAmount">
-    </app-form-field>
+      <app-form-field [control]="paymentForm.get('paymentAmount')">
+        <label for="payment" app-label>Payment Amount</label>
+        <input type="text" currencyMask [options]="{align: 'left'}" id="payment" app-input placeholder="$19.99" formControlName="paymentAmount">
+      </app-form-field>
 
-  </form>
+    </form>
 
-  <div actions class="actions">
-    <h3 *ngIf="transacting$ | async">Submitting...</h3>
-    <button class="cancel" [disabled]="(transacting$ | async)" (click)="reset()">Cancel</button>
-    <button type="submit" [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
-  </div>
-</app-card>
+    <div actions class="actions">
+      <h3 *ngIf="transacting$ | async">Submitting...</h3>
+      <button class="cancel" [disabled]="(transacting$ | async)" (click)="reset()">Cancel</button>
+      <button type="submit" [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
+    </div>
+  </app-card>
+</main>
 
 <footer>
   <app-card>
-
     <div body class="actions">
+      <h3>Admin Actions:</h3>
       <button (click)="addToBalance(100)">Add $100.00</button>
     </div>
   </app-card>
