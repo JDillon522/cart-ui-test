@@ -21,14 +21,14 @@
     position: relative;
     z-index: 1;
     display: block;
-    height: 37px;
-    width: calc(100% - 16px);
+    height: 3rem;
+    width: 100%;
     background-color: transparent;
     border: none;
     color: var.$pure-white;
     padding-bottom: 4px;
-    font-size: 15px;
-    line-height: 19px;
+    font-size: 1.75rem;
+    line-height: 2rem;
     font-weight: 300;
     font-style: normal;
     caret-color: var.$red;

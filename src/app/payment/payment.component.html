@@ -28,13 +28,13 @@
 
     <app-form-field [control]="paymentForm.get('total')">
       <label for="payment" app-label>Payment Amount</label>
-      <input type="text" id="payment" app-input placeholder="$19.99" formControlName="total">
+      <input type="text" currencyMask [options]="{align: 'left'}" id="payment" app-input placeholder="$19.99" formControlName="total">
     </app-form-field>
 
   </form>
 
   <div actions class="actions">
     <button class="cancel" (click)="reset()">Cancel</button>
-    <button [disabled]="paymentForm.invalid">Submit</button>
+    <button [disabled]="paymentForm.invalid" (click)="submit()">Submit</button>
   </div>
 </app-card>

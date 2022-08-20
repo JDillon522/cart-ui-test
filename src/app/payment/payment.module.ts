@@ -6,6 +6,7 @@ import { FormFieldModule } from '../shared/form-field/form-field.module';
 import { CardModule } from '../shared/card/card.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaymentService } from './payment.service';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 const routes: Route[] = [
   {
@@ -24,7 +25,8 @@ const routes: Route[] = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     FormFieldModule,
-    CardModule
+    CardModule,
+    CurrencyMaskModule
   ],
   providers: [
     PaymentService
