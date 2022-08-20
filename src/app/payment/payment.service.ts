@@ -82,7 +82,22 @@ export class PaymentService {
     }, 10);
   }
 
-  private updateDb(log: IFinalTransaction): boolean {
+  public addToBalance(addition: number): Observable<number> {
+    return of(addition).pipe(
+      withLatestFrom(this.availableBalance$),
+      map(([add, balance]) => {
+        balance += add;
+        if (this.updateDb({ newBalance: balance })) {
+          return balance;
+        }
+        throw new Error('Error increasing available balance');
+
+      }),
+      tap((newBalance) => this._availableBalance$.next(newBalance))
+    )
+  }
+
+  private updateDb(log: Partial<IFinalTransaction>): boolean {
     try {
       if (!log.newBalance) {
         throw new Error('New balance never set properly');

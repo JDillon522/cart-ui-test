@@ -1,5 +1,11 @@
 @use '../../styles/variables.scss' as var;
 
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -33,4 +39,8 @@ form {
   h3 {
     margin-right: auto;
   }
+}
+
+footer {
+  margin-top: auto;
 }

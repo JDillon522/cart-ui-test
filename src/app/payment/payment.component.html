@@ -9,7 +9,7 @@
 
 <app-card>
 
-  <form [formGroup]="paymentForm" body>
+  <form [formGroup]="paymentForm" body (keydown.enter)="submit()">
 
     <app-form-field [control]="paymentForm.get('name')">
       <label for="name" app-label>Name</label>
@@ -36,6 +36,15 @@
   <div actions class="actions">
     <h3 *ngIf="transacting$ | async">Submitting...</h3>
     <button class="cancel" [disabled]="(transacting$ | async)" (click)="reset()">Cancel</button>
-    <button [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
+    <button type="submit" [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
   </div>
 </app-card>
+
+<footer>
+  <app-card>
+
+    <div body class="actions">
+      <button (click)="addToBalance(100)">Add $100.00</button>
+    </div>
+  </app-card>
+</footer>
