@@ -35,6 +35,7 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.paymentService.getAvailableBalance();
   }
 
   public async submit(): Promise<void> {
