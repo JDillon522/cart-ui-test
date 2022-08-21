@@ -1,0 +1,11 @@
+<app-card *ngFor="let product of products$ | async">
+  <div body>
+    <h3>{{product.name}}</h3>
+    <img src="https://via.placeholder.com/150">
+  </div>
+
+  <div actions>
+    <p>{{product.price | currency}}</p>
+    <button class="add-to-card">Add</button>
+  </div>
+</app-card>
