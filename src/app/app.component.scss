@@ -1,0 +1,15 @@
+
+header {
+  margin-bottom: 3rem;
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3rem;
+
+    h3 {
+      margin-right: auto;
+    }
+  }
+}
