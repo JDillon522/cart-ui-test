@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from './cart.service';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CartIdInterceptor } from '../interceptors/cartId';
 
 @NgModule({
   declarations: [],
@@ -11,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CartIdInterceptor, multi: true },
     CartService
   ]
 })

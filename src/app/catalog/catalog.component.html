@@ -6,6 +6,8 @@
 
   <div actions>
     <p>{{product.price | currency}}</p>
-    <button class="add-to-card">Add</button>
+    <button class="add-to-card"
+      [disabled]="loading$ | async"
+      (click)="addProductToCart(product.id)">Add</button>
   </div>
 </app-card>

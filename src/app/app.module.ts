@@ -47,7 +47,6 @@ const routes: Route[] = [
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: CartIdInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

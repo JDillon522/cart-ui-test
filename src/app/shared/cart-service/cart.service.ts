@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, firstValueFrom, map, Observable } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
-import { ICart } from '../../cart/cart';
+import { IAddProductToCartRequest, ICart } from '../../cart/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,9 @@ export class CartService {
   });
   public cart$: Observable<ICart> = this._cart$.asObservable();
 
+  private _cartLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public cartLoading$: Observable<boolean> = this._cartLoading$.asObservable();
+
   private cartId: string = localStorage.getItem('cartId') || '';
 
   constructor(
@@ -25,10 +28,12 @@ export class CartService {
   ) { }
 
   public async getCart() {
+    this._cartLoading$.next(true);
+
     const cart = await firstValueFrom(
       this.http.get<ICart>(`${env.api}/cart/`, { observe: 'response' }).pipe(
         map(res => {
-
+          // We should only have to work about setting this once because its called onInit in app.component
           if (!this.cartId) {
             this.cartId = res.headers.get('Cartid') as string;
             localStorage.setItem('cartId', this.cartId);
@@ -39,7 +44,26 @@ export class CartService {
       )
     );
 
-    this._cartCount$.next(cart?.products?.length || 0);
-    this._cart$.next(cart)
+    const count = cart.products.length;
+    this._cartCount$.next(count);
+    this._cart$.next(cart);
+    this._cartLoading$.next(false);
+  }
+
+  public async addProductToCart(productId: number) {
+    const request: IAddProductToCartRequest = {
+      products: [{
+        product_id: productId,
+        quantity: 1 // a single click adds a single product
+      }]
+    }
+
+    this._cartLoading$.next(true);
+
+    await firstValueFrom(
+      this.http.post(`${env.api}/cart/items`, request)
+    );
+
+    await this.getCart();
   }
 }

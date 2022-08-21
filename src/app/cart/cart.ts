@@ -9,3 +9,12 @@ export interface ICart {
   success: boolean,
   totalCost: number;
 }
+
+export interface INewProduct {
+  product_id: number;
+  quantity: number;
+}
+
+export interface IAddProductToCartRequest {
+  products: INewProduct[];
+}

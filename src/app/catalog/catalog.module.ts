@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { CatalogComponent } from './catalog.component';
 import { Route, RouterModule } from '@angular/router';
 import { CatalogService } from './catalog.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CardModule } from '../shared/card/card.module';
+import { CartServiceModule } from '../shared/cart-service/cart-service.module';
+import { CartIdInterceptor } from '../shared/interceptors/cartId';
 
 const routes: Route[] = [
   {
@@ -25,6 +27,7 @@ const routes: Route[] = [
     CardModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CartIdInterceptor, multi: true },
     CatalogService
   ]
 })
