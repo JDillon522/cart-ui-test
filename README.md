@@ -22,10 +22,10 @@ Deployed on [GitHub Pages](https://jdillon522.github.io/cart-ui-test/)
   - [x] Visually show decrease in available balance during a transaction
   - [x] Admin ability to increase total
   - [x] Deploy to GitHub pages
-- [ ] Super Stretch Goals
-  - [ ] Integrate with an API
-  - [ ] Products Page
-  - [ ] Cart Page
+- [X] Super Stretch Goals
+  - [X] Integrate with an API
+  - [X] Products Page
+  - [X] Cart Page
 
 ### Notes:
 I decided to forego testing because of my limited availability. For an example of when I've written Angular tests take a look at [this other project](https://github.com/JDillon522/labCorp-coding-challenge)
