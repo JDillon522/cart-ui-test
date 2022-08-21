@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FundsAvailableValidator } from '../shared/validators/fundsAvailable.validator';
 import { PaymentService } from './payment.service';
-import { mergeWith, tap } from 'rxjs/operators';
-import { firstValueFrom } from 'rxjs';
+import { mergeWith, takeUntil, tap } from 'rxjs/operators';
+import { firstValueFrom, Subject } from 'rxjs';
 import { IPaymentForm, IPaymentFormValue } from '../shared/interfaces/payment';
+import { CartService } from '../shared/cart-service/cart.service';
 
 @Component({
   selector: 'app-payment',
@@ -12,7 +13,7 @@ import { IPaymentForm, IPaymentFormValue } from '../shared/interfaces/payment';
   styleUrls: ['./payment.component.scss'],
   providers: [FundsAvailableValidator]
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, OnDestroy{
   public availableBalance$ = this.paymentService.availableBalance$;
   public transacting$ = this.paymentService.transacting$.pipe(
     mergeWith(this.paymentService.loading$),
@@ -30,13 +31,27 @@ export class PaymentComponent implements OnInit {
     })
   });
 
+  // The only manual subscription because its getting late...
+  private destroyed$ = new Subject();
+
   constructor(
     private paymentService: PaymentService,
-    private fundsAvailable: FundsAvailableValidator
+    private fundsAvailable: FundsAvailableValidator,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
     this.paymentService.getAvailableBalance();
+    this.cartService.cart$.pipe(takeUntil(this.destroyed$)).subscribe(cart => {
+      this.paymentForm.patchValue({ paymentAmount: cart.totalCost });
+      this.paymentForm.get('paymentAmount')?.markAsTouched();
+      this.paymentForm.get('paymentAmount')?.updateValueAndValidity();
+      this.paymentForm.get('paymentAmount')?.disable();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.complete();
   }
 
   public async submit(): Promise<void> {
@@ -46,6 +61,8 @@ export class PaymentComponent implements OnInit {
 
     const form = this.paymentForm.getRawValue() as IPaymentFormValue;
 
+    await firstValueFrom(this.cartService.checkout());
+    await this.cartService.getCart();
     await firstValueFrom(this.paymentService.processTransaction(form));
 
     this.paymentForm.reset();
@@ -53,6 +70,8 @@ export class PaymentComponent implements OnInit {
 
   public async addToBalance(amount: number) {
     await firstValueFrom(this.paymentService.addToBalance(amount));
+    this.paymentForm.get('paymentAmount')?.markAsTouched();
+    this.paymentForm.get('paymentAmount')?.updateValueAndValidity();
   }
 
   public reset(): void {

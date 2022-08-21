@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { startCase } from 'lodash';
 import { BehaviorSubject, firstValueFrom, map, Observable } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
 import { IAddProductToCartRequest, ICart } from '../../cart/cart';
@@ -40,6 +41,10 @@ export class CartService {
           }
 
           return res.body as ICart;
+        }),
+        map(cart => {
+          cart.products.forEach(product => product.name = startCase(product.name));
+          return cart;
         })
       )
     );
@@ -65,5 +70,29 @@ export class CartService {
     );
 
     await this.getCart();
+  }
+
+  public async removeProductFromCart(productId: number) {
+    this._cartLoading$.next(true);
+
+    await firstValueFrom(
+      this.http.delete(`${env.api}/cart/items/${productId}`)
+    );
+
+    await this.getCart();
+  }
+
+  public async updateProductQty(productId: number, qty: number) {
+    this._cartLoading$.next(true);
+
+    await firstValueFrom(
+      this.http.put(`${env.api}/cart/items/${productId}/${qty}`, {})
+    );
+
+    await this.getCart();
+  }
+
+  public checkout(): Observable<void> {
+    return this.http.post<void>(`${env.api}/cart/checkout`, {})
   }
 }

@@ -8,10 +8,29 @@
   font-style: normal;
 }
 
-button.cancel {
-  background-color: transparent;
-
-  &:hover {
-    background-color: var.$red;
+button {
+  &.fab {
+    padding: 0;
+    font-weight: 700;
+    background-color: transparent;
   }
+
+  &.cancel {
+    background-color: transparent;
+
+    &:hover {
+      background-color: var.$red;
+    }
+  }
+
+  &.delete {
+    color: var.$red;
+  }
+  &.sub {
+    color: var.$red;
+  }
+  &.add {
+    color: var.$green;
+  }
+
 }

@@ -1,0 +1,17 @@
+
+div[actions] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.sub,
+.add {
+  padding: .25rem;
+  margin: 0 .5rem;
+}
+
+.sub {
+  margin-left: 1rem;
+}
