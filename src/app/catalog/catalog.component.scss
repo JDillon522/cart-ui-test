@@ -9,11 +9,15 @@
 }
 
 app-card {
-  width: 200px;
-  height: 300px;
+  width: 100%;
+  max-width: 400px;
 
   h3 {
     margin-bottom: 1rem;
+  }
+
+  img {
+    width: 100%;
   }
 
   div[actions] {
@@ -25,5 +29,9 @@ app-card {
     p {
       margin-right: auto;
     }
+  }
+
+  @media screen and (min-width: var.$tablet-min-width) {
+    width: 200px;
   }
 }

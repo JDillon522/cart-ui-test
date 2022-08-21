@@ -35,7 +35,7 @@
     </form>
 
     <div actions class="actions">
-      <h3 *ngIf="transacting$ | async">Submitting...</h3>
+      <h3 >Submitting...</h3>
       <button class="cancel" [disabled]="(transacting$ | async)" (click)="reset()">Cancel</button>
       <button type="submit" [disabled]="paymentForm.invalid || (transacting$ | async)" (click)="submit()">Submit</button>
     </div>

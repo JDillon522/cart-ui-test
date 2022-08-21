@@ -1,15 +1,23 @@
+@use '../../src/styles/variables.scss' as var;
 
 header {
   margin-bottom: 3rem;
 
+
   nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     gap: 3rem;
 
     h3 {
       margin-right: auto;
+      min-width: 300px;
+    }
+
+    @media screen and (min-width: var.$tablet-min-width) {
+      justify-content: flex-end;
     }
   }
 }

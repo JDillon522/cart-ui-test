@@ -5,3 +5,11 @@ section {
   padding: var.$base-margin;
   border-radius: var.$border-radius;
 }
+
+.body-content {
+  overflow-x: scroll;
+
+  @media screen and (min-width: var.$tablet-min-width) {
+    overflow: hidden;
+  }
+}
