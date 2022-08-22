@@ -7,7 +7,12 @@
   border-radius: var.$border-radius;
   display: block;
   align-items: center;
-  padding: .5rem .5rem 0;
+  padding: .5rem 0 0;
+
+  label {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
 
   &:focus-within {
     border: 1px solid var.$pure-white;
@@ -26,7 +31,8 @@
     background-color: transparent;
     border: none;
     color: var.$pure-white;
-    padding-bottom: 4px;
+    padding: 5px;
+    margin-top: 5px;
     font-size: 1.75rem;
     line-height: 2rem;
     font-weight: 300;
@@ -44,6 +50,9 @@
       color: var.$greyish-blue;
     }
 
+    &:disabled {
+      color: var.$greyish-blue;
+    }
   }
 }
 
